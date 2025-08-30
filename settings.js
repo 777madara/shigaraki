@@ -9,10 +9,10 @@ const chalk = require('chalk');
 
 //~~~~~~~~~~~~< GLOBAL SETTINGS >~~~~~~~~~~~~\\
 
-global.owner = ['6282113821188'] //['628','628'] 2 owner atau lebih
-global.author = 'Nazedev'
-global.botname = 'Hitori Bot'
-global.packname = 'Bot WhatsApp'
+global.owner = ['212711305094'] //['628','628'] 2 owner atau lebih
+global.author = 'OBITO'
+global.botname = 'OBITO BOT'
+global.packname = 'TOBI'
 global.listprefix = ['+','!','.']
 
 /*
@@ -55,14 +55,14 @@ global.money = {
 }
 
 global.mess = {
-	key: 'Apikey mu telah habis silahkan kunjungi\nhttps://my.hitori.pw',
-	owner: 'Fitur Khusus Owner!',
-	admin: 'Fitur Khusus Admin!',
-	botAdmin: 'Bot Bukan Admin!',
-	group: 'Gunakan Di Group!',
-	private: 'Gunakan Di Privat Chat!',
-	limit: 'Limit Anda Telah Habis!',
-	prem: 'Khusus User Premium!',
+	key: 'انتهت صلاحية مفتاح واجهة برمجة التطبيقات الخاص بك، يُرجى زيارة\nhttps://my.hitori.pw',
+	owner: '!ميزة خاصة بالمالكين فقط',
+	admin: '!ميزة خاصة بالمسؤولين فقط',
+	botAdmin: '!البوت ليس مسؤولاً',
+	group: '!لاستخدام في مجموعة',
+	private: '!الاستخدام في دردشة خاصة',
+	limit: '!انتهت صلاحية الحد الأقصى',
+	prem: '!للمستخدمين المميزين فقط',
 	wait: 'Loading...',
 	error: 'Error!',
 	done: 'Done'
@@ -90,3 +90,4 @@ fs.watchFile(file, () => {
 	delete require.cache[file]
 	require(file)
 });
+
