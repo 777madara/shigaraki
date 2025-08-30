@@ -3936,8 +3936,8 @@ module.exports = naze = async (naze, m, msg, store) => {
 				} else await templateMenu(naze, set.template, m, prefix, setv, db, { botNumber, author, packname, isVip, isPremium })
 			}
 			break
-			case 'allmenu': {
-				let profile
+			case 'allmenu': case 'اوامر': {
+				let profilر
 				try {
 					profile = await naze.profilePictureUrl(m.sender, 'image');
 				} catch (e) {
@@ -3952,7 +3952,7 @@ module.exports = naze = async (naze, m, msg, store) => {
 ├ *Money* : ${db.users[m.sender] ? db.users[m.sender].money.toLocaleString('id-ID') : '0'}
 ╰─┬────❍
 ╭─┴─❍「 *BOT INFO* 」❍
-├ *Nama Bot* : ${db?.set?.[botNumber]?.botname || 'Naze Bot'}
+├ *Nama Bot* : ${db?.set?.[botNumber]?.botname || 'OBITO BOT'}
 ├ *Powered* : @${'0@s.whatsapp.net'.split('@')[0]}
 ├ *Owner* : @${ownerNumber[0].split('@')[0]}
 ├ *Mode* : ${naze.public ? 'Public' : 'Self'}
@@ -4588,4 +4588,5 @@ fs.watchFile(file, () => {
 	delete require.cache[file]
 	require(file)
 });
+
 
