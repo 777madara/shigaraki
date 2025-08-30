@@ -386,7 +386,7 @@ module.exports = naze = async (naze, m, msg, store) => {
 				db.users[m.sender].limit += 3
 				db.users[m.sender].money += 3000
 			}
-			let str = `Room ID: ${room.id}\n\n${arr.slice(0, 3).join('')}\n${arr.slice(3, 6).join('')}\n${arr.slice(6).join('')}\n\n${isWin ? `@${winner.split('@')[0]} Menang!` : isTie ? `Game berakhir` : `Giliran ${['❌', '⭕'][1 * room.game._currentTurn]} (@${room.game.currentTurn.split('@')[0]})`}\n❌: @${room.game.playerX.split('@')[0]}\n⭕: @${room.game.playerO.split('@')[0]}\n\nKetik *nyerah* untuk menyerah dan mengakui kekalahan`
+			let str = `Room ID: ${room.id}\n\n${arr.slice(0, 3).join('')}\n${arr.slice(3, 6).join('')}\n${arr.slice(6).join('')}\n\n${isWin ? `@${winner.split('@')[0]} !مبروك` : isTie ? `الخاسر يسلم على مادارا` : `turn ${['❌', '⭕'][1 * room.game._currentTurn]} (@${room.game.currentTurn.split('@')[0]})`}\n❌: @${room.game.playerX.split('@')[0]}\n⭕: @${room.game.playerO.split('@')[0]}\n\n للاستسلام والاعتراف بالهزيمة ايها الخاسر *nyerah* اكتب `
 			if ((room.game._currentTurn ^ isSurrender ? room.x : room.o) !== m.chat)
 			room[room.game._currentTurn ^ isSurrender ? 'x' : 'o'] = m.chat
 			if (room.x !== room.o) await naze.sendMessage(room.x, { text: str, mentions: parseMention(str) }, { quoted: m })
@@ -3291,11 +3291,11 @@ module.exports = naze = async (naze, m, msg, store) => {
 				m.reply(`Berhasil delete session room suit !`)
 			}
 			break
-			case 'ttc': case 'ttt': case 'tictactoe': {
-				if (Object.values(tictactoe).find(room => room.id.startsWith('tictactoe') && [room.game.playerX, room.game.playerO].includes(m.sender))) return m.reply(`Kamu masih didalam game!\nKetik *${prefix}del${command}* Jika Ingin Mengakhiri sesi`);
+			case 'ttc': case 'اكس او': case 'tictactoe': {
+				if (Object.values(tictactoe).find(room => room.id.startsWith('tictactoe') && [room.game.playerX, room.game.playerO].includes(m.sender))) return m.reply(`!أنت لا تزال في اللعبة\n *${prefix}del${command}* إذا كنت تريد إنهاء الجلسة اكتب`);
 				let room = Object.values(tictactoe).find(room => room.state === 'WAITING' && (text ? room.name === text : true))
 				if (room) {
-					m.reply('Partner ditemukan!')
+					m.reply(' !تم العثور على شريكك الحمار')
 					room.o = m.chat
 					room.game.playerO = m.sender
 					room.state = 'PLAYING'
@@ -3305,7 +3305,7 @@ module.exports = naze = async (naze, m, msg, store) => {
 					let arr = room.game.render().map(v => {
 						return {X: '❌',O: '⭕',1: '1️⃣',2: '2️⃣',3: '3️⃣',4: '4️⃣',5: '5️⃣',6: '6️⃣',7: '7️⃣',8: '8️⃣',9: '9️⃣'}[v]
 					})
-					let str = `Room ID: ${room.id}\n\n${arr.slice(0, 3).join('')}\n${arr.slice(3, 6).join('')}\n${arr.slice(6).join('')}\n\nMenunggu @${room.game.currentTurn.split('@')[0]}\n\nKetik *nyerah* untuk menyerah dan mengakui kekalahan`
+					let str = `Room ID: ${room.id}\n\n${arr.slice(0, 3).join('')}\n${arr.slice(3, 6).join('')}\n${arr.slice(6).join('')}\n\nMenunggu @${room.game.currentTurn.split('@')[0]}\n\n *nyerah* للاستسلام والاعتراف بالهزيمة اكتب `
 					if (room.x !== room.o) await naze.sendMessage(room.x, { texr: str, mentions: parseMention(str) }, { quoted: m })
 					await naze.sendMessage(room.o, { text: str, mentions: parseMention(str) }, { quoted: m })
 				} else {
@@ -3317,11 +3317,11 @@ module.exports = naze = async (naze, m, msg, store) => {
 						state: 'WAITING',
 					}
 					if (text) room.name = text
-					naze.sendMessage(m.chat, { text: 'Menunggu partner' + (text ? ` mengetik command dibawah ini ${prefix}${command} ${text}` : ''), mentions: m.mentionedJid }, { quoted: m })
+					naze.sendMessage(m.chat, { text: 'في انتظار الشركاء' + (text ? `اكتب الأمر أدناهi ${prefix}${command} ${text}` : ''), mentions: m.mentionedJid }, { quoted: m })
 					tictactoe[room.id] = room
 					await sleep(300000)
 					if (tictactoe[room.id]) {
-						m.reply(`_Waktu ${command} habis_`)
+						m.reply(` _ ${command} انتهى وقت اللعبة__`)
 						delete tictactoe[room.id]
 					}
 				}
@@ -3329,9 +3329,9 @@ module.exports = naze = async (naze, m, msg, store) => {
 			break
 			case 'delttc': case 'delttt': {
 				let roomnya = Object.values(tictactoe).find(room => room.id.startsWith('tictactoe') && [room.game.playerX, room.game.playerO].includes(m.sender))
-				if (!roomnya) return m.reply(`Kamu sedang tidak berada di room tictactoe !`)
+				if (!roomnya) return m.reply(`! أنت لست في لعبة اكس او`)
 				delete tictactoe[roomnya.id]
-				m.reply(`Berhasil delete session room tictactoe !`)
+				m.reply(`! تم حذف غرفة الجلسة بنجاح`)
 			}
 			break
 			case 'akinator': {
@@ -4588,3 +4588,4 @@ fs.watchFile(file, () => {
 	delete require.cache[file]
 	require(file)
 });
+
